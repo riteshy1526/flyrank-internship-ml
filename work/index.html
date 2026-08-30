@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Refresh Opportunity Scoring for Search Discovery</title>
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        --ink: #17212b;
+        --muted: #536575;
+        --line: #dfe7ef;
+        --accent: #3d6d9a;
+        --accent-2: #5a8f6f;
+        --warn: #b46b3d;
+        --shadow: rgba(15, 23, 42, 0.08);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.7;
+      }
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 18px 72px;
+      }
+      .hero {
+        margin-top: 24px;
+        background: linear-gradient(135deg, #eaf1f9, #f8fafc);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px 30px;
+        box-shadow: 0 12px 28px var(--shadow);
+      }
+      h1, h2, h3 {
+        margin-top: 0;
+        color: var(--ink);
+        line-height: 1.2;
+      }
+      h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; }
+      h2 { font-size: clamp(1.5rem, 2.2vw, 2rem); margin: 32px 0 12px; }
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-top: 10px;
+      }
+      .section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 26px 28px;
+        margin-top: 22px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+      }
+      p, li { font-size: 1.02rem; }
+      ul { padding-left: 18px; }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 14px;
+        margin-top: 20px;
+      }
+      .metric {
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .metric .label {
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .metric .value {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-top: 8px;
+      }
+      .bars {
+        margin-top: 18px;
+      }
+      .bar-row {
+        margin-bottom: 16px;
+      }
+      .bar-row strong {
+        display: inline-block;
+        width: 110px;
+        font-size: 0.95rem;
+      }
+      .bar-track {
+        display: inline-block;
+        width: min(78%, 620px);
+        height: 20px;
+        background: #edf2f7;
+        border-radius: 999px;
+        overflow: hidden;
+        vertical-align: middle;
+        border: 1px solid #e2e8f0;
+      }
+      .bar-fill {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+      }
+      .bar-fill.model { background: linear-gradient(90deg, var(--accent), #8eb9d8); }
+      .bar-fill.baseline { background: linear-gradient(90deg, #c7d2df, #9aa9bb); }
+      .table-wrap { overflow-x: auto; }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 16px;
+      }
+      th, td {
+        border: 1px solid var(--line);
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th { background: #f3f7fb; }
+      .note { color: var(--muted); font-size: 0.92rem; }
+      .footer {
+        margin-top: 28px;
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        color: var(--muted);
+      }
+      a { color: var(--accent); }
+      @media (max-width: 640px) {
+        .section, .hero { padding: 18px 16px; }
+        .page { padding-inline: 12px; }
+        .bar-row strong { display: block; width: auto; margin-bottom: 6px; }
+        .bar-track { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="eyebrow">FlyRank ML Internship Capstone</div>
+        <h1>Content Refresh Opportunity Scoring for Search Discovery</h1>
+        <div class="meta">
+          <span>Lane: Refresh / Content Opportunity Scoring</span>
+          <span>Model: Random Forest vs transparent baseline</span>
+        </div>
+      </header>
+
+      <section class="section">
+        <h2>Abstract</h2>
+        <p>
+          Maintaining high-quality content is essential for sustained search visibility and user engagement.
+          Using the anonymized FlyRank internship dataset, this project studies which content pages should be prioritized
+          for refresh based on historical search performance, engagement, freshness, and content characteristics.
+          A transparent rule-based baseline and a client-aware machine learning model were compared on the same validation split.
+          In this sample, the learned model materially improved the quality of the top-ranked review queue: Precision@50 rose from
+          0.24 to 0.74, roughly a 3× lift in the most actionable review candidates. The final output is a ranked reviewer queue with
+          interpretable reasons, designed to support editorial decision-making rather than replace it.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>1. Introduction / Problem statement</h2>
+        <p>
+          The core decision this work supports is simple: given a limited editorial budget, which pages should a reviewer inspect first?
+          Search teams cannot manually review every content page, and the cost of a wrong decision is wasted effort. The aim is to identify
+          pages that are visible, stale, declining, or underperforming in their current state and therefore most likely to benefit from a refresh.
+        </p>
+        <p>
+          This is a prioritization task, not a claim that we can predict the Google algorithm. The output is a ranked review queue built from
+          measured signals in anonymized historical search data, intended as decision support for human editors and content strategists.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>2. Data</h2>
+        <p>
+          The analysis uses the anonymized starter dataset shipped with the FlyRank ML Internship repository:
+          <code>data/raw/content_refresh_anonymized.csv</code>. It contains roughly 30,000 content rows with search demand,
+          engagement, content age, freshness, and position signals, aggregated at a per-content level. The target used in the modeling step
+          is <code>is_declining_label</code>, a public-safe label based on the observed trend direction.
+        </p>
+        <p>
+          Public-safety rules were followed throughout: no client names, no domains, no URLs, no private queries, and no sensitive business
+          data were used. The repo’s data guidance also highlights important caveats: rate columns are x100 percentages, <code>avg_position = 0</code>
+          means no data rather than a rank of zero, and label-derived trend fields are never used as model features.
+        </p>
+        <ul>
+          <li>Rows used: ~30,000</li>
+          <li>Target positive rate: about 54.2%</li>
+          <li>Split strategy: client-aware holdout</li>
+          <li>Excluded: fields that would leak the target or reveal private client context</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>3. Methodology</h2>
+        <p>
+          The task was framed as a binary classification problem: identify content pages likely to be in a declining refresh state based on
+          historical search and engagement patterns. The validation design used a client-aware holdout split rather than a random row split so
+          that patterns from the same client would not leak between training and evaluation.
+        </p>
+        <p>
+          Features included search volume, impressions, clicks, CTR, average position, engagement rate, scroll rate, content age,
+          freshness, and content-type-related metadata. The transparent baseline was a hand-written rule combining visibility, freshness risk,
+          depth gap, and page-position opportunity. The learned models compared logistic regression, decision tree, and random forest models,
+          with model selection based on Precision@50 because the highest-value part of the queue is the top-ranked subset a human reviewer can act on.
+        </p>
+        <p>
+          Leakage checks were explicit: label-derived trend fields were not used as features, the target was defined from the observed downward trend,
+          and the holdout was grouped by client identity to reduce leakage risk.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>4. Results</h2>
+        <p>
+          The strongest result came from the random forest model. The relevant comparison is not raw accuracy but how well the model surfaces the
+          most useful review candidates early. Precision@50 is therefore the lead metric, because a reviewer realistically has limited time and
+          should see the best pages first.
+        </p>
+
+        <div class="metric-grid">
+          <div class="metric">
+            <div class="label">Random forest Precision@50</div>
+            <div class="value">0.74</div>
+          </div>
+          <div class="metric">
+            <div class="label">Baseline Precision@50</div>
+            <div class="value">0.24</div>
+          </div>
+          <div class="metric">
+            <div class="label">ROC AUC</div>
+            <div class="value">0.75</div>
+          </div>
+          <div class="metric">
+            <div class="label">Lift</div>
+            <div class="value">3×</div>
+          </div>
+        </div>
+
+        <div class="bars">
+          <div class="bar-row">
+            <strong>Model</strong>
+            <span class="bar-track"><span class="bar-fill model" style="width: 74%;"></span></span>
+            <span class="note">0.74</span>
+          </div>
+          <div class="bar-row">
+            <strong>Baseline</strong>
+            <span class="bar-track"><span class="bar-fill baseline" style="width: 24%;"></span></span>
+            <span class="note">0.24</span>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>ROC AUC</th>
+                <th>Avg Precision</th>
+                <th>Precision@50</th>
+                <th>Recall</th>
+                <th>F1</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Decision tree</td>
+                <td>0.742</td>
+                <td>0.575</td>
+                <td>0.620</td>
+                <td>0.716</td>
+                <td>0.634</td>
+              </tr>
+              <tr>
+                <td>Logistic regression</td>
+                <td>0.700</td>
+                <td>0.522</td>
+                <td>0.400</td>
+                <td>0.567</td>
+                <td>0.566</td>
+              </tr>
+              <tr>
+                <td>Random forest</td>
+                <td>0.750</td>
+                <td>0.618</td>
+                <td>0.740</td>
+                <td>0.744</td>
+                <td>0.640</td>
+              </tr>
+              <tr>
+                <td>Baseline rules</td>
+                <td>0.627</td>
+                <td>0.468</td>
+                <td>0.240</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>5. Limitations and honest framing</h2>
+        <p>
+          This work is a decision-support model based on a single anonymized sample. It should not be interpreted as a universal law of search,
+          nor as a causal test of content-refresh interventions. It measures patterns in observed data and translates them into a reviewer queue.
+        </p>
+        <p>
+          The model is strongest for prioritization and weakest for causal inference. A page flagged by the model is not automatically a page that
+          must be edited; editorial context, content strategy, product goals, and business priorities still matter. The client-aware holdout reduces
+          leakage risk, but it does not eliminate all drift risk across content types or traffic regimes.
+        </p>
+        <p>
+          The safe interpretation is directional and operational: this is a way to narrow the queue, not a command to publish or change content without review.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>6. Ranked recommendations</h2>
+        <ol>
+          <li><strong>Start with the top-ranked refresh queue.</strong> Focus attention on pages with visible demand, declining trend direction, and low CTR or weak engagement.</li>
+          <li><strong>Use the model to triage, not to automate.</strong> Treat the queue as a reviewer shortlist and confirm with editorial judgement.</li>
+          <li><strong>Prioritize pages with measurable opportunity.</strong> Pages with strong impressions and weak engagement are usually the best candidates for an update.</li>
+          <li><strong>Monitor rather than fix.</strong> Some pages are visible but not yet risky enough to justify immediate investment; they belong in a monitoring lane.</li>
+          <li><strong>Watch content-age and freshness signals.</strong> Older pages with sustained traffic and weak engagement are often more valuable candidates than low-volume pages.</li>
+        </ol>
+      </section>
+
+      <section class="section">
+        <h2>7. Reproducibility</h2>
+        <p>
+          The project is reproducible from the repository and the bundled sample data. The reference pipeline includes the feature preparation,
+          transparent baseline, model training, evaluation, and final queue export.
+        </p>
+        <p>
+          To reproduce the workflow from a fresh clone:</p>
+        <pre><code>python scripts/run_all.py</code></pre>
+        <p>
+          This regenerates the prepared feature vector, baseline queue, trained models, evaluation metrics, charts, and final report.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>8. Acknowledgments &amp; data credit</h2>
+        <p>
+          Built on the <a href="https://flyrank.ai" target="_blank" rel="noopener noreferrer">FlyRank ML Internship dataset</a>.
+          This project uses the anonymized internship data and follows the public-safe usage guidelines required by the project.
+        </p>
+      </section>
+
+      <div class="footer">
+        <p>Decision-support framing only. No private client data, no client-identifying URLs, and no causal claims beyond the observed measurement.</p>
+      </div>
+    </div>
+  </body>
+</html>
