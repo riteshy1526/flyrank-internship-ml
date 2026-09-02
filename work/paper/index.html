@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FlyRank ML | Content Opportunity Scoring</title>
+
+    <!-- CSS FILE -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="hero">
+
+        <nav class="navbar">
+            <div class="logo">FlyRank ML</div>
+
+            <a
+                href="https://github.com/riteshy1526/flyrank-internship-ml"
+                target="_blank"
+                class="nav-github"
+            >
+                GitHub ↗
+            </a>
+        </nav>
+
+        <div class="hero-content">
+
+            <span class="eyebrow">MACHINE LEARNING CAPSTONE</span>
+
+            <h1>
+                Content Opportunity<br>
+                Scoring
+            </h1>
+
+            <p class="hero-description">
+                An end-to-end machine-learning decision-support project
+                for prioritising content-refresh opportunities using
+                anonymised content-page data.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#results" class="button primary">
+                    View Results
+                </a>
+
+                <a
+                    href="https://github.com/riteshy1526/flyrank-internship-ml"
+                    target="_blank"
+                    class="button secondary"
+                >
+                    View ML Repository →
+                </a>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+    <main>
+
+        <!-- QUESTION -->
+        <section class="section" id="question">
+
+            <div class="section-number">01</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">QUESTION</span>
+
+                <h2>
+                    Can machine-learning signals support
+                    content-refresh prioritisation?
+                </h2>
+
+                <p>
+                    This project investigates whether measurable content,
+                    search-performance, engagement, and freshness signals
+                    can provide a useful directional ranking signal for
+                    identifying content opportunities.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- DATA -->
+        <section class="section">
+
+            <div class="section-number">02</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">DATA</span>
+
+                <h2>Dataset & Features</h2>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <strong>30,000</strong>
+                        <span>Content-page records</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <strong>44</strong>
+                        <span>Dataset fields</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <strong>NDCG</strong>
+                        <span>Ranking evaluation metric</span>
+                    </div>
+
+                </div>
+
+                <p>
+                    The public project uses an anonymised content-page
+                    dataset. Features include search demand, competition,
+                    content length, traffic performance, engagement,
+                    freshness, and historical trend signals.
+                </p>
+
+                <div class="tags">
+
+                    <span>Search Volume</span>
+                    <span>Competition</span>
+                    <span>Traffic</span>
+                    <span>CTR</span>
+                    <span>Engagement</span>
+                    <span>Content Age</span>
+                    <span>Freshness</span>
+                    <span>Trend</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- METHODOLOGY -->
+        <section class="section">
+
+            <div class="section-number">03</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">METHODOLOGY</span>
+
+                <h2>From Baseline to Machine Learning</h2>
+
+                <div class="method-grid">
+
+                    <div class="method-card">
+                        <span>01</span>
+                        <h3>Data Preparation</h3>
+                        <p>
+                            Feature selection, missing-value handling,
+                            and preparation of the modelling dataset.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>02</span>
+                        <h3>Baseline</h3>
+                        <p>
+                            A transparent rule-based scoring approach
+                            was used as the comparison baseline.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>03</span>
+                        <h3>Random Forest</h3>
+                        <p>
+                            A Random Forest regression model was trained
+                            using the selected measurable signals.
+                        </p>
+                    </div>
+
+                    <div class="method-card">
+                        <span>04</span>
+                        <h3>Grouped Validation</h3>
+                        <p>
+                            Client-grouped validation was used to avoid
+                            client overlap between training and testing.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULTS -->
+        <section class="section results-section" id="results">
+
+            <div class="section-number">04</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">RESULTS</span>
+
+                <h2>Model vs Baseline</h2>
+
+                <p>
+                    Both approaches were evaluated on the same held-out
+                    client-grouped test split using NDCG.
+                </p>
+
+                <div class="results-grid">
+
+                    <div class="result-card">
+
+                        <span>Baseline NDCG</span>
+
+                        <strong>0.9999</strong>
+
+                    </div>
+
+                    <div class="result-card">
+
+                        <span>Random Forest NDCG</span>
+
+                        <strong>0.9971</strong>
+
+                    </div>
+
+                    <div class="result-card difference">
+
+                        <span>Difference</span>
+
+                        <strong>-0.0028</strong>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-card">
+
+                    <h3>NDCG Comparison</h3>
+
+                    <img
+                        src="./images/ndcg_comparison.png"
+                        alt="NDCG comparison between baseline and Random Forest"
+                    >
+
+                </div>
+
+                <div class="result-note">
+
+                    <strong>Key finding</strong>
+
+                    <p>
+                        On the evaluated split, the transparent baseline
+                        slightly outperformed the Random Forest model.
+                        This shows that a more complex model does not
+                        automatically provide a better ranking signal.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURE IMPORTANCE -->
+        <section class="section">
+
+            <div class="section-number">05</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">MODEL INTERPRETATION</span>
+
+                <h2>Feature Importance</h2>
+
+                <p>
+                    Random Forest feature importance provides an indication
+                    of which input signals contributed most to the model's
+                    predictions on the evaluated dataset.
+                </p>
+
+                <div class="chart-card">
+
+                    <img
+                        src="./images/feature_importance.png"
+                        alt="Top 10 Random Forest feature importances"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LIMITATIONS -->
+        <section class="section">
+
+            <div class="section-number">06</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">LIMITATIONS</span>
+
+                <h2>Honest Framing</h2>
+
+                <div class="limitations">
+
+                    <div>
+                        <h3>Observed, not guaranteed</h3>
+                        <p>
+                            Results describe performance on the evaluated
+                            anonymised dataset and should not be treated
+                            as guaranteed real-world outcomes.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3>Validation scope</h3>
+                        <p>
+                            Client-grouped validation reduces client overlap,
+                            but broader temporal and production validation
+                            would be needed before deployment.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3>Decision support</h3>
+                        <p>
+                            The model should be considered a directional
+                            decision-support signal rather than an automatic
+                            content-refresh decision maker.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECOMMENDATIONS -->
+        <section class="section">
+
+            <div class="section-number">07</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">ACTION PLAYBOOK</span>
+
+                <h2>Ranked Recommendations</h2>
+
+                <div class="recommendation-list">
+
+                    <div class="recommendation">
+
+                        <div class="rank">01</div>
+
+                        <div>
+                            <h3>Use transparent signals first</h3>
+
+                            <p>
+                                Start with measurable freshness,
+                                traffic-trend, CTR, and content-age
+                                signals when prioritising reviews.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="recommendation">
+
+                        <div class="rank">02</div>
+
+                        <div>
+                            <h3>Validate before acting</h3>
+
+                            <p>
+                                Review high-ranked pages with additional
+                                business and content context before
+                                deciding to refresh them.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="recommendation">
+
+                        <div class="rank">03</div>
+
+                        <div>
+                            <h3>Prefer evidence over complexity</h3>
+
+                            <p>
+                                Compare machine-learning models against
+                                simple baselines instead of assuming that
+                                a more complex model is automatically better.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GITHUB PROJECT -->
+        <section class="section github-section">
+
+            <div class="section-number">08</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">PROJECT REPOSITORY</span>
+
+                <h2>Explore the Complete ML Project</h2>
+
+                <p>
+                    The complete machine-learning workflow, notebooks,
+                    validation work, analysis, and project artifacts are
+                    available in the public GitHub repository.
+                </p>
+
+                <div class="github-card">
+
+                    <div class="github-icon">
+                        ↗
+                    </div>
+
+                    <div class="github-info">
+
+                        <h3>
+                            FlyRank ML Internship —
+                            Content Opportunity Scoring
+                        </h3>
+
+                        <p>
+                            An end-to-end machine-learning decision-support
+                            project developed using an anonymised content-page
+                            dataset. The project compares a transparent
+                            rule-based baseline with a Random Forest model
+                            using client-grouped validation and NDCG evaluation.
+                        </p>
+
+                        <div class="github-tags">
+
+                            <span>Python</span>
+                            <span>Pandas</span>
+                            <span>Scikit-learn</span>
+                            <span>Random Forest</span>
+                            <span>NDCG</span>
+                            <span>Grouped Validation</span>
+
+                        </div>
+
+                        <a
+                            href="https://github.com/riteshy1526/flyrank-internship-ml"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="github-button"
+                        >
+                            View ML Project on GitHub →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- REPRODUCIBILITY -->
+        <section class="section">
+
+            <div class="section-number">09</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">REPRODUCIBILITY</span>
+
+                <h2>Project Artifacts</h2>
+
+                <p>
+                    The analysis and validation workflow can be reviewed
+                    through the project notebooks and repository.
+                </p>
+
+                <div class="artifact-links">
+
+                    <a
+                        href="https://github.com/riteshy1526/flyrank-internship-ml/blob/main/work/notebooks/capstone.ipynb"
+                        target="_blank"
+                    >
+                        <span>Capstone Notebook</span>
+                        <b>→</b>
+                    </a>
+
+                    <a
+                        href="https://github.com/riteshy1526/flyrank-internship-ml/blob/main/work/notebooks/w05_model.ipynb"
+                        target="_blank"
+                    >
+                        <span>Week 5 — Model Development</span>
+                        <b>→</b>
+                    </a>
+
+                    <a
+                        href="https://github.com/riteshy1526/flyrank-internship-ml/blob/main/work/notebooks/w06_validation_audit.ipynb"
+                        target="_blank"
+                    >
+                        <span>Week 6 — Validation Audit</span>
+                        <b>→</b>
+                    </a>
+
+                    <a
+                        href="https://github.com/riteshy1526/flyrank-internship-ml"
+                        target="_blank"
+                    >
+                        <span>Complete GitHub Repository</span>
+                        <b>→</b>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACKNOWLEDGMENT -->
+        <section class="section acknowledgment">
+
+            <div class="section-number">10</div>
+
+            <div class="section-content">
+
+                <span class="eyebrow">ACKNOWLEDGMENT</span>
+
+                <h2>Data Credit</h2>
+
+                <p>
+                    Built on the
+                    <a
+                        href="https://flyrank.ai"
+                        target="_blank"
+                    >
+                        FlyRank ML Internship dataset
+                    </a>.
+                </p>
+
+                <p class="small-text">
+                    The public version of this project uses anonymised
+                    data and excludes client names, private queries,
+                    and private URLs.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+
+        <div class="footer-content">
+
+            <div>
+                <strong>FlyRank ML Capstone</strong>
+
+                <p>
+                    Content Opportunity Scoring · Machine Learning
+                </p>
+            </div>
+
+            <a
+                href="https://github.com/riteshy1526/flyrank-internship-ml"
+                target="_blank"
+            >
+                GitHub ↗
+            </a>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Ritesh Kumar Yadav · B.Tech CSE (AI & ML)
+        </div>
+
+    </footer>
+
+</body>
+</html>
